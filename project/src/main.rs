@@ -16,9 +16,30 @@ fn ignore_warning_from_unused_vars(){
     let _x = 12;
 }
 
+#[allow(dead_code)]
+fn no_void() -> () {
+    println!("ok");
+}
+
+fn match_(val: i8) -> i8 {
+    match val {
+        3 => {
+            println!("is 3 !");
+            10_i8
+        }
+        _ => {
+            println!("Something else.");
+            22_i8
+        }
+    }
+}
+
 fn time_goes(age: u16) -> u16{
     let newage = age + 1;
-    return newage;
+
+    // this will return
+    // we could also do 'return newage;'
+    newage
 }
 
 fn destructured_vars(){
@@ -100,10 +121,60 @@ fn main() {
     destructured_vars();
 
     // a multiple type in array
-    multiple_type_in_array();
+    multiple_type_in_array(  );
 
     // to get the type of a value
     println!("> type of hobbies is '{}'", type_of(&hobbies));
 
+    // ranges
+    // ..= (means inclusive)
+    // .. (is not inclusive)
+    let range = 5..10;
+    for i in range {
+        println!("Hello {}", i);
+    }
     // loop on a -> Z
+    for c in 'a'..='d' {
+        println!("> {}", c);
+    }
+
+    // defined type integers
+    let _xyz: u8 = 10_u8; // means it is unsigned
+    // println!("{}", (-12 + xyz)); // will raise since -12 is a signed (belongs to negative values).
+
+    // {} <- value
+    // {:?} <- value with type
+
+    // chars
+    let xx: char = 'a';
+    println!("{:?}", xx);
+
+    let uni: (u8, &str) = (12, "ok");
+    println!("{:?}", uni);
+
+    let mut arr = vec![];
+    arr.push("x");
+    arr.push("13");
+    // difference between push and append
+    // push add a new item;
+    // append add a vector to the other one;
+    println!("{:?}", arr);
+
+    // Mutiline expressions
+    let zeta: () = {
+        let x = 12_u16;
+        let y = 30_u16;
+
+        // I can either add a return
+        // statement or just leave as it
+        // (WITHOUT the semicolomn ;)
+        // it will assing the computed value to
+        //
+        // zeta.
+        let result = x * y - (x^y);
+        println!("{:?}", result);
+    };
+
+    println!("zeta={:?}", zeta);
+    println!("{:?}", match_(3));
 }
