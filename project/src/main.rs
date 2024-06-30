@@ -177,4 +177,24 @@ fn main() {
 
     println!("zeta={:?}", zeta);
     println!("{:?}", match_(3));
+
+    ownership();
+}
+
+fn ownership(){
+
+    let a = String::from("1");
+    // i have to use .clone() because i will use
+    // a later and the new owner of it is owner method.
+    println!("{:?}", owner(a.clone()));
+
+    println!("{}", a);
+}
+
+fn owner(z: String) -> (String, String, String) {
+    let x = String::from("this");
+    let y = x.clone();
+    // x = String::from("doum");
+
+    (y, x, z)
 }
